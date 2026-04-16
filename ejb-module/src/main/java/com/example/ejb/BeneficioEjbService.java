@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Stateless
 public class BeneficioEjbService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "bipPU")
     private EntityManager em;
 
     public void transfer(Long fromId, Long toId, BigDecimal amount) {
