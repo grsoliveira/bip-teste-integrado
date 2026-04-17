@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.example.ejb.BeneficioService;
 import com.example.ejb.dto.BeneficioDTO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/beneficios")
 public class BeneficioController {
 
@@ -24,28 +27,29 @@ public class BeneficioController {
   }
 
   @GetMapping
-  public List<BeneficioDTO> list() {
-    return this.ejb.findAll();
+  public ResponseEntity<List<BeneficioDTO>> list() {
+    return ResponseEntity.ok(this.ejb.findAll());
   }
 
   @GetMapping("/{id}")
-  public BeneficioDTO findById(@PathVariable Long id) {
-    return this.ejb.findById(id);
+  public ResponseEntity<BeneficioDTO> findById(@PathVariable Long id) {
+    return ResponseEntity.ok(this.ejb.findById(id));
   }
 
   @PutMapping("/{id}")
-  public BeneficioDTO update(@PathVariable Long id, @RequestBody BeneficioDTO dto) {
-    return this.ejb.update(id, dto);
+  public ResponseEntity<BeneficioDTO> update(@PathVariable Long id, @RequestBody BeneficioDTO dto) {
+    return ResponseEntity.ok(this.ejb.update(id, dto));
   }
 
   @PostMapping
-  public BeneficioDTO create(@RequestBody BeneficioDTO dto) {
-    return this.ejb.create(dto);
+  public ResponseEntity<BeneficioDTO> create(@RequestBody BeneficioDTO dto) {
+    return ResponseEntity.status(201).body(this.ejb.create(dto));
   }
 
   @DeleteMapping("/{id}")
-  public void delete(@PathVariable Long id) {
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
     this.ejb.delete(id);
+    return ResponseEntity.noContent().build();
   }
 
 }
