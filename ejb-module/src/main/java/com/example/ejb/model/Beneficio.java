@@ -1,4 +1,4 @@
-package com.example.ejb;
+package com.example.ejb.model;
 
 import java.math.BigDecimal;
 
@@ -10,11 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "beneficio")
 @Getter
+@NoArgsConstructor
 public class Beneficio {
 
   @Id
