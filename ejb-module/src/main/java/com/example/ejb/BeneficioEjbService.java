@@ -4,18 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.ejb.LocalBean;
-import jakarta.ejb.Singleton;
-import jakarta.ejb.Startup;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-//TODO revisar necessidade de todas essas tags quando a integração foi feita com o backend.
-@Singleton
-@Startup
-@LocalBean
-public class BeneficioEjbService {
+@Stateless
+public class BeneficioEjbService implements BeneficioService {
 
   @PersistenceContext(unitName = "bipPU")
   private EntityManager em;
@@ -39,9 +33,7 @@ public class BeneficioEjbService {
         .getResultList();
   }
 
-  @PostConstruct
-  public void init() {
-    log.info("### TESTANDO EJB ###");
-    this.findAll().forEach(b -> log.info(b.getNome()));
+  public void teste() {
+    log.info("Testando o EJB");
   }
 }
