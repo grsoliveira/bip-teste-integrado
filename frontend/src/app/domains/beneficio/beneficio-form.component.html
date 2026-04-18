@@ -1,0 +1,32 @@
+<div>
+  <h1>{{ isEdit() ? 'Editar' : 'Novo' }} Benefício</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div>
+      <label>Nome</label>
+      <input formControlName="nome" type="text" />
+    </div>
+
+    <div>
+      <label>Descrição</label>
+      <input formControlName="descricao" type="text" />
+    </div>
+
+    <div>
+      <label>Valor</label>
+      <input formControlName="valor" type="number" step="0.01" />
+    </div>
+
+    <div>
+      <label>
+        <input formControlName="ativo" type="checkbox" />
+        Ativo
+      </label>
+    </div>
+
+    <button type="submit">Salvar</button>
+    <button type="button" (click)="router.navigate(['/beneficios'])">Cancelar</button>
+
+  </form>
+</div>
