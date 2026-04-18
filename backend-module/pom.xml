@@ -43,18 +43,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!-- Conexão com o EJB -->
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-client-all</artifactId>
-            <version>39.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>ejb-module</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>
