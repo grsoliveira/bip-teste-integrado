@@ -5,10 +5,10 @@
 
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
-        <class>com.example.ejb.model.Beneficio</class>
+        <class>com.example.ejb.Beneficio</class>
 
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
 
