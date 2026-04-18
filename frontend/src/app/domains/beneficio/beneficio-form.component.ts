@@ -13,7 +13,7 @@ import { BeneficioRepository } from './beneficio.repository';
 export class BeneficioFormComponent implements OnInit {
   private readonly repo = inject(BeneficioRepository);
   private readonly fb = inject(FormBuilder);
-  private readonly router = inject(Router);
+  readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
   isEdit = signal(false);
