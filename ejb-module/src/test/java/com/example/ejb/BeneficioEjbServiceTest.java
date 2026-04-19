@@ -17,6 +17,7 @@ import com.example.ejb.dto.BeneficioDTO;
 import com.example.ejb.model.Beneficio;
 import jakarta.ejb.EJBException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -203,15 +204,13 @@ class BeneficioEjbServiceTest {
     Beneficio to = new Beneficio();
     to.setValor(new BigDecimal("500.00"));
 
-    when(em.find(Beneficio.class, 1L)).thenReturn(from);
-    when(em.find(Beneficio.class, 2L)).thenReturn(to);
+    when(em.find(Beneficio.class, 1L, LockModeType.OPTIMISTIC)).thenReturn(from);
+    when(em.find(Beneficio.class, 2L, LockModeType.OPTIMISTIC)).thenReturn(to);
 
     service.transfer(1L, 2L, new BigDecimal("200.00"));
 
     assertThat(from.getValor()).isEqualByComparingTo("800.00");
     assertThat(to.getValor()).isEqualByComparingTo("700.00");
-    verify(em).merge(from);
-    verify(em).merge(to);
   }
 
 }

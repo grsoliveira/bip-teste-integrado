@@ -9,6 +9,7 @@ import com.example.ejb.model.Beneficio;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
@@ -20,15 +21,30 @@ public class BeneficioEjbService implements BeneficioService {
   private static final Logger log = Logger.getLogger(BeneficioEjbService.class.getName());
 
   public void transfer(Long fromId, Long toId, BigDecimal amount) {
-    Beneficio from = em.find(Beneficio.class, fromId);
-    Beneficio to = em.find(Beneficio.class, toId);
+    if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+      throw new EJBException("O valor da transferência deve ser maior que zero.");
+    }
 
-    // BUG: sem validações, sem locking, pode gerar saldo negativo e lost update
+    if (fromId.equals(toId)) {
+      throw new EJBException("Origem e destino não podem ser o mesmo benefício.");
+    }
+
+    Beneficio from = em.find(Beneficio.class, fromId, LockModeType.OPTIMISTIC);
+    Beneficio to = em.find(Beneficio.class, toId, LockModeType.OPTIMISTIC);
+
+    if (from == null) {
+      throw new EJBException("Benefício de origem não encontrado.");
+    }
+    if (to == null) {
+      throw new EJBException("Benefício de destino não encontrado.");
+    }
+
+    if (from.getValor().compareTo(amount) < 0) {
+      throw new EJBException("Saldo insuficiente no benefício de origem.");
+    }
+
     from.setValor(from.getValor().subtract(amount));
     to.setValor(to.getValor().add(amount));
-
-    em.merge(from);
-    em.merge(to);
   }
 
   //candidato a migrar para uma abstract class ou interface

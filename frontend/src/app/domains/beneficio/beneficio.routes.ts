@@ -16,4 +16,9 @@ export const BENEFICIO_ROUTES: Routes = [
     loadComponent: () =>
       import('./beneficio-form.component').then(m => m.BeneficioFormComponent),
   },
+  {
+    path: 'transfer',
+    loadComponent: () =>
+      import('./beneficio-transfer.component').then(m => m.BeneficioTransferComponent),
+  },
 ];
