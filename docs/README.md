@@ -2,6 +2,12 @@
 
 Projeto de estudo com arquitetura integrada entre EJB, Spring Boot REST e Angular, com abordagem DDD no frontend.
 
+![CI](https://github.com/grsoliveira/bip-teste-integrado/actions/workflows/ci.yml/badge.svg)
+![Issues](https://img.shields.io/github/issues/grsoliveira/bip-teste-integrado)
+![Last Commit](https://img.shields.io/github/last-commit/grsoliveira/bip-teste-integrado)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Angular](https://img.shields.io/badge/Angular-17-red)
+
 ---
 
 ## 🧱 Estrutura do projeto
