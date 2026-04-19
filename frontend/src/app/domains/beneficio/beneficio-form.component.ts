@@ -21,11 +21,14 @@ export class BeneficioFormComponent implements OnInit {
   id = signal<number | null>(null);
 
   form = this.fb.group({
-    nome: ['', Validators.required],
+    nome: ['', [Validators.required, Validators.minLength(3)]],
     descricao: [''],
     ativo: [true],
-    valor: [0, [Validators.required, Validators.min(0)]],
+    valor: [0, [Validators.required, Validators.min(0.01)]],
   });
+
+  get nome() { return this.form.get('nome'); }
+  get valor() { return this.form.get('valor'); }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -39,7 +42,10 @@ export class BeneficioFormComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     const payload = { id: this.id(), ...this.form.getRawValue() } as any;
 
