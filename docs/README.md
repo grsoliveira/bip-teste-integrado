@@ -8,6 +8,11 @@ Projeto de estudo com arquitetura integrada entre EJB, Spring Boot REST e Angula
 ![Java](https://img.shields.io/badge/Java-17-blue)
 ![Angular](https://img.shields.io/badge/Angular-17-red)
 
+A branch de trabalho foi a develop, mergeada apenas ao final para a branch main. 
+
+- 🔀 [Commits Develop](https://github.com/grsoliveira/bip-teste-integrado/commits/develop)
+- 🔁 [Pull Requests](https://github.com/grsoliveira/bip-teste-integrado/pulls)
+- 🌐 [Network Graph](https://github.com/grsoliveira/bip-teste-integrado/network)
 ---
 
 ## 🧱 Estrutura do projeto
