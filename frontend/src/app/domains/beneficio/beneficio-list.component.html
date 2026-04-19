@@ -1,36 +1,50 @@
-<div>
-  <h1>Benefícios</h1>
-  <button (click)="router.navigate(['/beneficios/novo'])">+ Novo</button>
+<div class="page">
+  <div class="page-header">
+    <h1>Benefícios</h1>
+    <button class="btn-primary" (click)="router.navigate(['/beneficios/novo'])">
+      + Novo Benefício
+    </button>
+  </div>
 
-  @if (loading()) {
-    <p>Carregando...</p>
-  } @else if (error()) {
-    <p>{{ error() }}</p>
-  } @else {
-    <table>
-      <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Ativo</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
-        @for (b of beneficios(); track b.id) {
-          <tr>
-            <td>{{ b.nome }}</td>
-            <td>{{ b.descricao }}</td>
-            <td>{{ b.valor | currency:'BRL' }}</td>
-            <td>{{ b.ativo ? 'Sim' : 'Não' }}</td>
-            <td>
-              <button (click)="router.navigate(['/beneficios', b.id, 'editar'])">Editar</button>
-              <button (click)="delete(b.id!)">Excluir</button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  }
+  <div class="card">
+    @if (loading()) {
+      <p class="empty">Carregando...</p>
+    } @else if (error()) {
+      <p class="empty">{{ error() }}</p>
+    } @else if (beneficios().length === 0) {
+      <p class="empty">Nenhum benefício cadastrado.</p>
+    } @else {
+      <table>
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (b of beneficios(); track b.id) {
+            <tr>
+              <td>{{ b.nome }}</td>
+              <td>{{ b.descricao }}</td>
+              <td>{{ b.valor | currency:'BRL' }}</td>
+              <td>
+                <span class="badge" [class.active]="b.ativo" [class.inactive]="!b.ativo">
+                  {{ b.ativo ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+              <td>
+                <div class="actions">
+                  <button class="btn-edit" (click)="router.navigate(['/beneficios', b.id, 'editar'])">Editar</button>
+                  <button class="btn-danger" (click)="delete(b.id!)">Excluir</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
 </div>
