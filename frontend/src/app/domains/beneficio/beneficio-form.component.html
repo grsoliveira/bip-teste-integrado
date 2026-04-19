@@ -9,6 +9,12 @@
       <div class="form-group">
         <label for="nome">Nome</label>
         <input id="nome" formControlName="nome" type="text" placeholder="Nome do benefício" />
+        @if (nome?.invalid && nome?.touched) {
+          <span class="field-error">
+            @if (nome?.errors?.['required']) { Nome é obrigatório. }
+            @else if (nome?.errors?.['minlength']) { Mínimo de 3 caracteres. }
+          </span>
+        }
       </div>
 
       <div class="form-group">
@@ -19,6 +25,12 @@
       <div class="form-group">
         <label for="valor">Valor</label>
         <input id="valor" formControlName="valor" type="number" step="0.01" placeholder="0,00" />
+        @if (valor?.invalid && valor?.touched) {
+          <span class="field-error">
+            @if (valor?.errors?.['required']) { Valor é obrigatório. }
+            @else if (valor?.errors?.['min']) { Valor deve ser maior que zero. }
+          </span>
+        }
       </div>
 
       <div class="checkbox-group">
