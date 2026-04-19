@@ -9,6 +9,7 @@ import { Beneficio } from './beneficio.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './beneficio-list.component.html',
+  styleUrl: './beneficio-list.component.scss'
 })
 export class BeneficioListComponent implements OnInit {
   private readonly repo = inject(BeneficioRepository);

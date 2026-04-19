@@ -9,6 +9,7 @@ import { BeneficioRepository } from './beneficio.repository';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './beneficio-form.component.html',
+  styleUrl: './beneficio-form.component.scss',
 })
 export class BeneficioFormComponent implements OnInit {
   private readonly repo = inject(BeneficioRepository);
