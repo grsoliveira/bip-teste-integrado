@@ -10,5 +10,5 @@
 
 -- O DDL vai ficar a cargo do JPA usando a classe @Entity
 -- Os inserts devem ficar separados (um em cada instrução) e sem quenbras de linha para evitar erros de execução.
-INSERT INTO BENEFICIO (NOME, DESCRICAO, VALOR, ATIVO) VALUES ('Beneficio A', 'Descrição A', 1000.00, TRUE);
-INSERT INTO BENEFICIO (NOME, DESCRICAO, VALOR, ATIVO) VALUES ('Beneficio B', 'Descrição B', 500.00, TRUE);
+INSERT INTO BENEFICIO (NOME, DESCRICAO, VALOR, ATIVO, VERSION) VALUES ('Beneficio A', 'Descrição A', 1000.00, TRUE, 0);
+INSERT INTO BENEFICIO (NOME, DESCRICAO, VALOR, ATIVO, VERSION) VALUES ('Beneficio B', 'Descrição B', 500.00, TRUE, 0);
