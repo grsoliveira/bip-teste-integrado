@@ -1,9 +1,14 @@
 <div class="page">
   <div class="page-header">
     <h1>Benefícios</h1>
-    <button class="btn-primary" (click)="router.navigate(['/beneficios/novo'])">
-      + Novo Benefício
-    </button>
+    <div class="header-actions">
+      <button class="btn-secondary" (click)="router.navigate(['/beneficios/transfer'])">
+        Transferir
+      </button>
+      <button class="btn-primary" (click)="router.navigate(['/beneficios/novo'])">
+        + Novo Benefício
+      </button>
+    </div>
   </div>
 
   <div class="card">
