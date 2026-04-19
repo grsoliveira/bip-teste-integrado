@@ -1,5 +1,6 @@
 package com.example.ejb;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.example.ejb.dto.BeneficioDTO;
@@ -16,4 +17,6 @@ public interface BeneficioService {
   BeneficioDTO update(Long id, BeneficioDTO dto);
 
   void delete(Long id);
+
+  void transfer(Long fromId, Long toId, BigDecimal amount);
 }

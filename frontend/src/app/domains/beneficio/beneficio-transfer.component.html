@@ -1,0 +1,65 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Transferir Valor</h1>
+  </div>
+
+  <div class="card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="form-group">
+        <label for="fromId">Origem</label>
+        <select id="fromId" formControlName="fromId">
+          <option [ngValue]="null" disabled>Selecione o benefício de origem</option>
+          @for (b of beneficios(); track b.id) {
+            <option [ngValue]="b.id">{{ b.nome }} — {{ b.valor | currency:'BRL' }}</option>
+          }
+        </select>
+        @if (fromId?.invalid && fromId?.touched) {
+          <span class="field-error">Selecione o benefício de origem.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="toId">Destino</label>
+        <select id="toId" formControlName="toId">
+          <option [ngValue]="null" disabled>Selecione o benefício de destino</option>
+          @for (b of beneficios(); track b.id) {
+            <option [ngValue]="b.id">{{ b.nome }} — {{ b.valor | currency:'BRL' }}</option>
+          }
+        </select>
+        @if (toId?.invalid && toId?.touched) {
+          <span class="field-error">Selecione o benefício de destino.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Valor a transferir</label>
+        <input id="amount" formControlName="amount" type="number" step="0.01" placeholder="0,00" />
+        @if (amount?.invalid && amount?.touched) {
+          <span class="field-error">
+            @if (amount?.errors?.['required']) { Valor é obrigatório. }
+            @else if (amount?.errors?.['min']) { Valor deve ser maior que zero. }
+          </span>
+        }
+      </div>
+
+      @if (erro()) {
+        <div class="alert alert-error">{{ erro() }}</div>
+      }
+
+      @if (sucesso()) {
+        <div class="alert alert-success">Transferência realizada com sucesso!</div>
+      }
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="router.navigate(['/beneficios'])">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary">
+          Transferir
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
