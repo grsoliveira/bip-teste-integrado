@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.ejb.BeneficioService;
 import com.example.ejb.dto.BeneficioDTO;
+import com.example.ejb.dto.TransferDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,6 +50,12 @@ public class BeneficioController {
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     this.ejb.delete(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @PostMapping("/transfer")
+  public ResponseEntity<Void> transfer(@RequestBody TransferDTO dto) {
+    this.ejb.transfer(dto.getFromId(), dto.getToId(), dto.getAmount());
     return ResponseEntity.noContent().build();
   }
 
