@@ -1,43 +1,102 @@
-# 🏗️ Desafio Fullstack Integrado
-🚨 Instrução Importante (LEIA ANTES DE COMEÇAR)
-❌ NÃO faça fork deste repositório.
+# BIP - Teste Integrado
 
-Este repositório é fornecido como modelo/base. Para realizar o desafio, você deve:
-✅ Opção correta (obrigatória)
-  Clique em “Use this template” (se este repositório estiver marcado como Template)
-OU
-  Clone este repositório e crie um NOVO repositório público em sua conta GitHub.
-📌 O resultado deve ser um repositório próprio, independente deste.
+Projeto de estudo com arquitetura integrada entre EJB, Spring Boot REST e Angular, com abordagem DDD no frontend.
 
-## 🎯 Objetivo
-Criar solução completa em camadas (DB, EJB, Backend, Frontend), corrigindo bug em EJB e entregando aplicação funcional.
+![CI](https://github.com/grsoliveira/bip-teste-integrado/actions/workflows/ci.yml/badge.svg)
+![Issues](https://img.shields.io/github/issues/grsoliveira/bip-teste-integrado)
+![Last Commit](https://img.shields.io/github/last-commit/grsoliveira/bip-teste-integrado)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Angular](https://img.shields.io/badge/Angular-17-red)
 
-## 📦 Estrutura
-- db/: scripts schema e seed
-- ejb-module/: serviço EJB com bug a ser corrigido
-- backend-module/: backend Java 8+
-- frontend/: app Angular
-- docs/: instruções e critérios
-- .github/workflows/: CI
+---
 
-## ✅ Tarefas do candidato
-1. Executar db/schema.sql e db/seed.sql
-2. Corrigir bug no BeneficioEjbService
-3. Implementar backend CRUD + integração com EJB
-4. Desenvolver frontend Angular consumindo backend
-5. Implementar testes
-6. Documentar (Swagger, README)
-7. Enviar link para recrutadora com seu repositório para análise
+## 🧱 Estrutura do projeto
 
-## 🐞 Bug no EJB
-- Transferência não verifica saldo, não usa locking, pode gerar inconsistência
-- Espera-se correção com validações, rollback, locking/optimistic locking
+```
+bip-teste-integrado/
+├── ejb-module/       # EJB Stateless com JPA e lógica de negócio
+├── backend-module/   # Spring Boot REST API
+├── frontend/         # Angular 17+ com estrutura DDD
+└── db/               # Scripts de banco de dados
+```
 
-## 📊 Critérios de avaliação
-- Arquitetura em camadas (20%)
-- Correção EJB (20%)
-- CRUD + Transferência (15%)
-- Qualidade de código (10%)
-- Testes (15%)
-- Documentação (10%)
-- Frontend (10%)
+A arquitetura do projeto seguiu conceitos de DDD, onde todos os arquivos referentes a um domínio específico são armazenados no mesmo local. No caso do projeto Angular, todos os arquivos referentes a beneficios estão na mesma pasta, o que deve facilitar para expansão para um projeto de microfrontend. O mesmo foi feito para os casos de backend e ejb. 
+
+---
+
+## ⚙️ Pré-requisitos
+
+- Java 17+
+- Maven 3.8+
+- Docker e Docker Compose
+- Node.js 18+ (via NVM recomendado)
+- Angular CLI (`npm install -g @angular/cli`)
+
+---
+
+## 🚀 Como rodar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/grsoliveira/bip-teste-integrado.git
+cd bip-teste-integrado
+```
+
+### 2. Subir o EJB (WildFly + H2)
+
+```bash
+cd ejb-module
+sh run.sh
+```
+
+> O WildFly sobe na porta `8080` com o H2 em memória. Aguarde a mensagem `WildFly started`.
+
+### 3. Subir o Backend (Spring Boot)
+
+```bash
+cd backend-module
+./mvnw spring-boot:run
+```
+
+> A API REST estará disponível em `http://localhost:8080/api/v1`
+
+### 4. Subir o Frontend (Angular)
+
+```bash
+cd frontend/beneficios-app
+npm install
+ng serve
+```
+
+> Acesse `http://localhost:4200`
+
+---
+
+## 📖 Documentação da API
+
+Com o backend rodando, acesse o Swagger em:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+## 🐛 Issues e melhorias
+
+Acompanhe as tarefas, bugs e próximos passos do projeto na aba de Issues do GitHub:
+
+👉 [github.com/grsoliveira/bip-teste-integrado/issues](https://github.com/grsoliveira/bip-teste-integrado/issues)
+
+---
+
+## 🛠️ Tecnologias
+
+- **EJB 3** — lógica de negócio e persistência com JPA/Hibernate
+- **WildFly 39** — servidor de aplicação Jakarta EE
+- **Spring Boot 3** — camada REST
+- **Angular 17** — frontend com signals e standalone components
+- **H2** — banco de dados em memória
+- **Docker** — containerização do EJB
+- **Swagger / SpringDoc** — documentação da API
